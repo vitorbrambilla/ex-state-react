@@ -1,17 +1,41 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import './styles.css';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+class App extends Component {
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      clock: 1000,
+      cup: 'water'
+    }
+  }
+
+  componentDidMount() {
+    this.setState({
+      cup: 'soda'
+    })
+  }
+
+  changeCup =  () => {
+    this.setState({
+      cup: 'beer'
+    })
+  }
+
+  render() {
+    const { clock, cup } = this.state
+
+    return (
+      <div>
+        <h1>{clock}</h1>
+        <button onClick={() => this.changeCup()}><h1>{cup}</h1></button>
+      </div>
+    )
+  }
+}
+
+const rootElement = document.getElementById('root');
+ReactDOM.render(<App />, rootElement);
